@@ -1,0 +1,244 @@
+@import "../../../../../styles/variables";
+@import "../../../../../styles/mixins";
+
+.products-container {
+  background-color: $white;
+  border-radius: $border-radius;
+  box-shadow: $box-shadow;
+  padding: 1.5rem;
+  width: 100%;
+  max-width: 1200px;
+  margin: 0 auto;
+}
+
+.products-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 1.5rem;
+
+  @include mobile {
+    flex-direction: column;
+    align-items: stretch;
+    gap: 1rem;
+  }
+}
+
+.search-container {
+  flex: 1;
+  max-width: 400px;
+
+  @include mobile {
+    max-width: 100%;
+  }
+}
+
+.search-input {
+  width: 100%;
+  padding: 0.75rem 1rem;
+  border: 1px solid $gray-200;
+  border-radius: $border-radius;
+  font-size: 1rem;
+
+  &:focus {
+    outline: none;
+    border-color: $primary;
+    box-shadow: 0 0 0 2px rgba($primary, 0.2);
+  }
+}
+
+.products-table-container {
+  width: 100%;
+  overflow-x: auto;
+}
+
+.products-table {
+  width: 100%;
+  border-collapse: collapse;
+
+  th,
+  td {
+    padding: 1rem;
+    text-align: left;
+    border-bottom: 1px solid $gray-200;
+  }
+
+  th {
+    background-color: $gray-100;
+    font-weight: 600;
+    color: $gray-800;
+  }
+
+  tr:last-child td {
+    border-bottom: none;
+  }
+
+  tr:hover td {
+    background-color: $gray-50;
+  }
+}
+
+.logo-cell {
+  width: 60px;
+}
+
+.product-logo {
+  width: 40px;
+  height: 40px;
+  border-radius: 50%;
+  background-color: $gray-200;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  overflow: hidden;
+
+  img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+  }
+}
+
+.logo-placeholder {
+  color: $gray-600;
+  font-weight: 600;
+  font-size: 0.9rem;
+}
+
+.products-footer {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-top: 1.5rem;
+
+  @include mobile {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 1rem;
+  }
+}
+
+.results-count {
+  color: $gray-600;
+}
+
+.items-per-page {
+  padding: 0.5rem;
+  border: 1px solid $gray-200;
+  border-radius: $border-radius;
+  background-color: $white;
+
+  &:focus {
+    outline: none;
+    border-color: $primary;
+  }
+}
+
+.dropdown {
+  position: relative;
+  display: inline-block;
+}
+
+.dropdown-toggle {
+  background: none;
+  border: none;
+  cursor: pointer;
+  font-size: 1.5rem;
+  color: $gray-600;
+  line-height: 1;
+
+  &:hover {
+    color: $primary;
+  }
+}
+
+.dropdown-menu {
+  position: absolute;
+  right: 0;
+  top: 100%;
+  background-color: $white;
+  border-radius: $border-radius;
+  box-shadow: $box-shadow;
+  min-width: 120px;
+  z-index: 10;
+  display: none;
+
+  .dropdown:hover & {
+    display: block;
+  }
+}
+
+.dropdown-item {
+  display: block;
+  width: 100%;
+  padding: 0.75rem 1rem;
+  text-align: left;
+  background: none;
+  border: none;
+  cursor: pointer;
+
+  &:hover {
+    background-color: $gray-100;
+  }
+}
+
+.modal-overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background-color: rgba($black, 0.6);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 100;
+}
+
+.modal-container {
+  background-color: $white;
+  border-radius: $border-radius;
+  width: 90%;
+  max-width: 500px;
+  box-shadow: $box-shadow;
+}
+
+.modal-header {
+  padding: 1.5rem;
+  border-bottom: 1px solid $gray-200;
+
+  h3 {
+    margin: 0;
+    font-size: 1.25rem;
+    color: $gray-900;
+  }
+}
+
+.modal-footer {
+  padding: 1rem 1.5rem;
+  display: flex;
+  justify-content: flex-end;
+  gap: 1rem;
+
+  @include mobile {
+    flex-direction: column;
+  }
+}
+
+.no-results {
+  text-align: center;
+  color: $gray-500;
+  padding: 2rem 0;
+}
+
+.btn-primary {
+  @include button-style($primary, $black);
+}
+
+.btn-secondary {
+  @include button-style($gray-300, $gray-900);
+}
+
+.btn-danger {
+  @include button-style($primary, $black);
+}

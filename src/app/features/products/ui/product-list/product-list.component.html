@@ -1,0 +1,102 @@
+<div class="products-container">
+  <div class="products-header">
+    <div class="search-container">
+      <input
+        type="text"
+        placeholder="Search..."
+        (input)="onSearch($event)"
+        class="search-input"
+      />
+    </div>
+    <button class="btn-primary" (click)="navigateToAddProduct()">
+      Agregar
+    </button>
+  </div>
+
+  <div class="products-table-container">
+    <table class="products-table">
+      <thead>
+        <tr>
+          <th>Logo</th>
+          <th>Nombre del producto</th>
+          <th>Descripción</th>
+          <th>Fecha de liberación</th>
+          <th>Fecha de reestructuración</th>
+          <th></th>
+        </tr>
+      </thead>
+      <tbody>
+        @for (product of productsService.paginatedProducts(); track product.id)
+        {
+        <tr>
+          <td class="logo-cell">
+            <div class="product-logo">
+              @if (product.logo) {
+              <img
+                [src]="product.logo"
+                alt="Product logo"
+                onerror="this.textContent='JG'"
+              />
+              } @else {
+              <div class="logo-placeholder">JG</div>
+              }
+            </div>
+          </td>
+          <td>{{ product.name }}</td>
+          <td>{{ product.description }}</td>
+          <td>{{ product.date_release | date : "dd/MM/yyyy" }}</td>
+          <td>{{ product.date_revision | date : "dd/MM/yyyy" }}</td>
+          <td>
+            <div class="dropdown">
+              <button class="dropdown-toggle">⋮</button>
+              <div class="dropdown-menu">
+                <button class="dropdown-item" (click)="editProduct(product)">
+                  Editar
+                </button>
+                <button class="dropdown-item" (click)="confirmDelete(product)">
+                  Eliminar
+                </button>
+              </div>
+            </div>
+          </td>
+        </tr>
+        } @empty {
+        <tr>
+          <td colspan="6" class="no-results">No hay productos disponibles</td>
+        </tr>
+        }
+      </tbody>
+    </table>
+  </div>
+
+  <div class="products-footer">
+    <div class="results-count">
+      {{ productsService.totalFilteredCount() }} Resultados
+    </div>
+
+    <div class="pagination-controls">
+      <select (change)="onItemsPerPageChange($event)" class="items-per-page">
+        <option value="5">5</option>
+        <option value="10">10</option>
+        <option value="20">20</option>
+      </select>
+    </div>
+  </div>
+</div>
+
+<!-- Delete Confirmation Modal -->
+@if (showDeleteModal) {
+<div class="modal-overlay">
+  <div class="modal-container">
+    <div class="modal-header">
+      <h3>
+        ¿Estas seguro de eliminar el producto {{ selectedProduct?.name }}?
+      </h3>
+    </div>
+    <div class="modal-footer">
+      <button class="btn-secondary" (click)="cancelDelete()">Cancelar</button>
+      <button class="btn-danger" (click)="deleteProduct()">Confirmar</button>
+    </div>
+  </div>
+</div>
+}

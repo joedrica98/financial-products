@@ -1,0 +1,132 @@
+<div class="form-container">
+  <h2 class="form-title">
+    {{ isEditMode() ? "Editar Producto" : "Formulario de Registro" }}
+  </h2>
+
+  <form [formGroup]="productForm" (ngSubmit)="onSubmit()">
+    <div class="form-grid">
+      <!-- ID y Nombre -->
+      <div class="form-group">
+        <label for="id">ID</label>
+        <input
+          type="text"
+          id="id"
+          formControlName="id"
+          [attr.disabled]="isEditMode() ? '' : null"
+          class="form-control"
+          [ngClass]="{ 'form-control-error': isInvalid('id') }"
+        />
+        @if (isInvalid('id')) {
+        <div class="error-message">
+          @if (productForm.get('id')?.errors?.['required']) {ID es requerido}
+          @else if (productForm.get('id')?.errors?.['minlength']) {ID debe tener
+          al menos 3 caracteres} @else if
+          (productForm.get('id')?.errors?.['maxlength']) {ID debe tener máximo
+          10 caracteres} @else if (productForm.get('id')?.errors?.['idExists'])
+          {ID no válido!}
+        </div>
+        }
+      </div>
+
+      <div class="form-group">
+        <label for="name">Nombre</label>
+        <input
+          type="text"
+          id="name"
+          formControlName="name"
+          class="form-control"
+          [ngClass]="{ 'form-control-error': isInvalid('name') }"
+        />
+        @if (isInvalid('name')) {
+        <div class="error-message">
+          @if (productForm.get('name')?.errors?.['required']) {Nombre es
+          requerido} @else if (productForm.get('name')?.errors?.['minlength'])
+          {Nombre debe tener al menos 5 caracteres} @else if
+          (productForm.get('name')?.errors?.['maxlength']) {Nombre debe tener
+          máximo 100 caracteres}
+        </div>
+        }
+      </div>
+
+      <!-- Descripción y Logo -->
+      <div class="form-group">
+        <label for="description">Descripción</label>
+        <input
+          type="text"
+          id="description"
+          formControlName="description"
+          class="form-control"
+          [ngClass]="{ 'form-control-error': isInvalid('description') }"
+        />
+        @if (isInvalid('description')) {
+        <div class="error-message">
+          @if (productForm.get('description')?.errors?.['required']) {Este campo
+          es requerido!} @else if
+          (productForm.get('description')?.errors?.['minlength']) {Descripción
+          debe tener al menos 10 caracteres} @else if
+          (productForm.get('description')?.errors?.['maxlength']) {Descripción
+          debe tener máximo 200 caracteres}
+        </div>
+        }
+      </div>
+
+      <div class="form-group">
+        <label for="logo">Logo</label>
+        <input
+          type="text"
+          id="logo"
+          formControlName="logo"
+          class="form-control"
+          [ngClass]="{ 'form-control-error': isInvalid('logo') }"
+        />
+        @if (isInvalid('logo')) {
+        <div class="error-message">Este campo es requerido!</div>
+        }
+      </div>
+
+      <!-- Fechas -->
+      <div class="form-group">
+        <label for="date_release">Fecha Liberación</label>
+        <input
+          type="date"
+          id="date_release"
+          formControlName="date_release"
+          class="form-control"
+          [ngClass]="{ 'form-control-error': isInvalid('date_release') }"
+        />
+        @if (isInvalid('date_release')) {
+        <div class="error-message">
+          @if (productForm.get('date_release')?.errors?.['required']) {Este
+          campo es requerido!} @else if
+          (productForm.get('date_release')?.errors?.['minDate']) {La fecha debe
+          ser igual o mayor a la fecha actual}
+        </div>
+        }
+      </div>
+
+      <div class="form-group">
+        <label for="date_revision">Fecha Revisión</label>
+        <input
+          type="date"
+          id="date_revision"
+          formControlName="date_revision"
+          class="form-control"
+          readonly
+        />
+      </div>
+    </div>
+
+    <div class="form-actions">
+      <button type="button" class="btn-secondary" (click)="resetForm()">
+        Reiniciar
+      </button>
+      <button
+        type="submit"
+        class="btn-primary"
+        [disabled]="productForm.invalid || isSubmitting()"
+      >
+        {{ isEditMode() ? "Actualizar" : "Enviar" }}
+      </button>
+    </div>
+  </form>
+</div>

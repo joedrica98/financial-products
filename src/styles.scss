@@ -1,1 +1,148 @@
-/* You can add global styles to this file, and also import other style files */
+@import "styles/variables";
+@import "styles/mixins";
+
+/* Reset and base styles */
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+html {
+  font-size: 16px;
+  height: 100%;
+}
+
+body {
+  font-family: $font-family-base;
+  font-size: $font-size-base;
+  line-height: $line-height-base;
+  color: $gray-900;
+  background-color: $gray-100;
+  min-height: 100%;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+/* Default container padding */
+.container {
+  width: 100%;
+  max-width: 1200px;
+  padding: 0 1rem;
+  margin: 0 auto;
+}
+
+/* Page layout */
+.page-container {
+  padding: 2rem 1rem;
+
+  @include mobile {
+    padding: 1rem 0.5rem;
+  }
+}
+
+/* Typography */
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
+  margin-bottom: 0.5rem;
+  font-weight: 600;
+  line-height: 1.2;
+}
+
+h1 {
+  font-size: 2.5rem;
+}
+
+h2 {
+  font-size: 2rem;
+}
+
+h3 {
+  font-size: 1.75rem;
+}
+
+h4 {
+  font-size: 1.5rem;
+}
+
+h5 {
+  font-size: 1.25rem;
+}
+
+h6 {
+  font-size: 1rem;
+}
+
+p {
+  margin-bottom: 1rem;
+}
+
+a {
+  color: $primary;
+  text-decoration: none;
+
+  &:hover {
+    text-decoration: underline;
+  }
+}
+
+/* Utility classes */
+.text-center {
+  text-align: center;
+}
+
+.text-right {
+  text-align: right;
+}
+
+.mt-1 {
+  margin-top: $spacer-sm;
+}
+
+.mt-2 {
+  margin-top: $spacer-md;
+}
+
+.mt-3 {
+  margin-top: $spacer-lg;
+}
+
+.mt-4 {
+  margin-top: $spacer-xl;
+}
+
+.mb-1 {
+  margin-bottom: $spacer-sm;
+}
+
+.mb-2 {
+  margin-bottom: $spacer-md;
+}
+
+.mb-3 {
+  margin-bottom: $spacer-lg;
+}
+
+.mb-4 {
+  margin-bottom: $spacer-xl;
+}
+
+/* Animations */
+.fade-in {
+  animation: fadeIn 0.3s ease-in;
+}
+
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
+}

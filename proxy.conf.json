@@ -1,0 +1,11 @@
+{
+  "/api/bp/products": {
+    "target": "http://localhost:3002",
+    "secure": false,
+    "pathRewrite": {
+      "^/api/bp/products": "/bp/products"
+    },
+    "changeOrigin": true,
+    "logLevel": "debug"
+  }
+}
