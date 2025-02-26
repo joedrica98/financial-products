@@ -94,6 +94,7 @@ export class ProductFormComponent implements OnInit {
     this.productForm
       .get('id')
       ?.valueChanges.pipe(
+        debounceTime(300),
         filter((value) => value?.length >= 3),
         switchMap((value) => {
           return this.productsService.verifyProductId(value).pipe(
