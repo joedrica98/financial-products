@@ -1,15 +1,23 @@
+// src/app/features/products/ui/product-list/product-list.component.ts
+import { Component, OnInit, inject, signal } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { Component, inject, OnInit } from '@angular/core';
 import { Router, RouterModule } from '@angular/router';
 import { FormsModule } from '@angular/forms';
 import { ProductsService } from '../../application/products.service';
-import { ToastService } from '../../../../shared/services/toast.service';
 import { FinancialProduct } from '../../../../core/models/financial-product.model';
+import { ToastService } from '../../../../shared/services/toast.service';
+import { ProductListSkeletonComponent } from './product-list-skeleton/product-list-skeleton.component';
 
 @Component({
   selector: 'app-product-list',
-  imports: [CommonModule, RouterModule, FormsModule],
-  templateUrl: './product-list.component.html',
+  standalone: true,
+  imports: [
+    CommonModule,
+    RouterModule,
+    FormsModule,
+    ProductListSkeletonComponent,
+  ],
+  templateUrl: 'product-list.component.html',
   styleUrl: './product-list.component.scss',
 })
 export class ProductListComponent implements OnInit {
@@ -19,13 +27,21 @@ export class ProductListComponent implements OnInit {
 
   showDeleteModal = false;
   selectedProduct: FinancialProduct | null = null;
+  isLoading = signal(true);
 
   constructor() {}
 
   ngOnInit(): void {
+    this.isLoading.set(true);
     this.productsService.loadProducts().subscribe({
+      next: () => {
+        setTimeout(() => {
+          this.isLoading.set(false);
+        }, 800);
+      },
       error: (error) => {
-        console.error(error);
+        console.error('Error loading products:', error);
+        this.isLoading.set(false);
       },
     });
   }
@@ -66,7 +82,7 @@ export class ProductListComponent implements OnInit {
           this.selectedProduct = null;
         },
         error: (error) => {
-          console.error(error);
+          console.error('Error deleting product:', error);
         },
       });
     }

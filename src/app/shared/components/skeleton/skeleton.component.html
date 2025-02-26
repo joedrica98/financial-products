@@ -1,0 +1,14 @@
+<div
+  class="skeleton-loader"
+  [ngClass]="{
+    'skeleton-circle': type === 'circle',
+    'skeleton-text': type === 'text',
+    'skeleton-rectangle': type === 'rectangle'
+  }"
+  [ngStyle]="{
+    width: width,
+    height: height,
+    'margin-bottom': marginBottom,
+    'border-radius': type === 'rectangle' ? borderRadius : null
+  }"
+></div>

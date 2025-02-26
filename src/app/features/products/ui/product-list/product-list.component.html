@@ -1,3 +1,6 @@
+@if (isLoading()) {
+<app-product-list-skeleton [rowCount]="5"></app-product-list-skeleton>
+} @else {
 <div class="products-container">
   <div class="products-header">
     <div class="search-container">
@@ -83,6 +86,7 @@
     </div>
   </div>
 </div>
+}
 
 <!-- Delete Confirmation Modal -->
 @if (showDeleteModal) {
