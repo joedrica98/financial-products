@@ -5,6 +5,7 @@ import {
 } from '@angular/common/http/testing';
 import { ProductsRepository } from './products.repository';
 import { FinancialProduct } from '../../../core/models/financial-product.model';
+import { ApiResponse } from '../../../core/models/api-response.model';
 
 describe('ProductsRepository', () => {
   let repository: ProductsRepository;
@@ -112,10 +113,10 @@ describe('ProductsRepository', () => {
     it('should delete a product', () => {
       const mockResponse = {
         message: 'Product removed successfully',
-      };
+      } as ApiResponse<void>;
 
       repository.deleteProduct('test1').subscribe((response) => {
-        expect(response).toEqual({ ...mockResponse, data: undefined });
+        expect(response).toEqual(mockResponse);
       });
 
       const req = httpMock.expectOne(`${baseUrl}/test1`);
