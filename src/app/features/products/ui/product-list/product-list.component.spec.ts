@@ -135,6 +135,10 @@ describe('ProductListComponent', () => {
   });
 
   it('should display products in the table', () => {
+    // Forzar que el estado de carga se complete
+    component.isLoading.set(false);
+    fixture.detectChanges();
+
     const productRows = fixture.debugElement.queryAll(By.css('tbody tr'));
     expect(productRows.length).toBe(2);
 
@@ -148,6 +152,10 @@ describe('ProductListComponent', () => {
   });
 
   it('should display the total count of products', () => {
+    // Forzar que el estado de carga se complete
+    component.isLoading.set(false);
+    fixture.detectChanges();
+
     const resultsCount = fixture.debugElement.query(By.css('.results-count'));
     expect(resultsCount.nativeElement.textContent).toContain('2 Resultados');
   });

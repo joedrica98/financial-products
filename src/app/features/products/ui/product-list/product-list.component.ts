@@ -1,4 +1,3 @@
-// src/app/features/products/ui/product-list/product-list.component.ts
 import { Component, OnInit, inject, signal } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { Router, RouterModule } from '@angular/router';
